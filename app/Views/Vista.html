@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <title> Tienda </title>
+
+    <!-- Archivos CSS -->
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+
+    <!-- LLamando a Angular y Archivos JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"> </script>
+    <script src="../../public/js/tienda.js"> </script>
+  
+  </head>
+  
+  <body class="bodyini fondoLogin" ng-app="App">
+    
+    <div class="container" style="margin-top:40px">
+      <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <strong> Modulo de Tienda </strong>
+            </div>
+
+              <div class="panel-body">
+
+                <!-- Llamamos el controlador -->
+                <div ng-controller="ControladorTienda">
+
+
+               <div class="col-lg-6">
+                    
+                    <button class="btn btn-info form-control" ng-click= "ShowForm('Clientes')"> Formulario Clientes </button>
+                        
+                </div>
+
+                <div class="col-lg-6">
+                    
+                    <button class="btn btn-info form-control" ng-click= "ShowForm('Productos')"> Formulario Productos  </button>
+                        
+                </div>
+                    
+
+                <label></label>
+
+
+                    <!-- Formulario Clientes -->
+                    <div  ng-hide="formularioClientes" > 
+
+                       <fieldset>
+
+                      <legend> Formulario de Clientes </legend>
+
+
+                      <div class="col-lg-6">
+
+                        <label> Nombre del Cliente </label>
+                        <input type="text" class="form-control" ng-model="nombre" min="1"  value="">
+
+                        <label> Apellido del Cliente: </label>
+                        <input type="text" class="form-control" ng-model="apellido" value="">
+
+                      </div>
+
+                      <div class="col-lg-6">
+
+                        <label>Telefono del Cliente</label>
+                        <input type="number" class="form-control" ng-model="telefono" min="1"  value="">
+
+                        <label></label>
+                        <form ng-submit="agregarDatosCliente()">
+                          <button class="btn btn-info"> Agregar Datos del Cliente </button>
+                        </form>   
+                      </div>
+
+                       </fieldset>
+                        
+
+                        <div style="padding:20px">
+
+                        <label>  Numero de Clientes  Registrados: [ {{ contadorClientes }}  ] 
+                                 Cupos Disponiles [ {{ 10 - contadorClientes }} ]</label> 
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Buscar Nombre" ng-model="buscarNombre">
+                    </div>
+                    <label> </label>
+                    <table class="table table-bordered">
+
+                      <tr>
+                        <th> Id </th> 
+                        <th> Nombre </th> 
+                        <th> Apellido </th> 
+                        <th> Telefono </th> 
+
+                      <tr>
+                          
+                      <tr ng-repeat="cliente in clientes | filter: buscarNombre">
+
+                        <td>   <span> {{ cliente.contador }} </span>   </td>
+                        <td>   <span> {{ cliente.nombre }} </span>   </td>
+                        <td>   <span> {{ cliente.apellido }} </span>   </td>
+                        <td>   <span> {{ cliente.telefono }} </span>   </td>
+
+                      <tr>
+
+                    </table>
+                    </div> 
+
+                        
+                    </div>
+
+
+                    
+                    <!-- Fin de Clientes -->
+
+                 
+
+
+                      <!-- Formulario Productos -->
+                      <div  ng-hide="formularioProductos" > 
+
+                        <fieldset>
+
+                        <legend> Formulario de Productos </legend>
+
+                        <div class="col-lg-6">
+
+                          <label> Codigo de Producto: </label>
+                          <input type="number" class="form-control" ng-model="codigo" min="1"  value="">
+
+                          <label> Descripcion de Producto: </label>
+                          <input type="text" class="form-control" ng-model="descripcion" value="">
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+                          <label>Valor Unitario:</label>
+                          <input type="number" class="form-control" ng-model="valor" min="1"  value="">
+
+                          <label>Existencia:</label>
+                          <input type="number" class="form-control" ng-model="existencia" min="1"  value="">
+
+                          <label></label>
+
+                          <form ng-submit="agregarDatosProducto()">
+                            <button class="btn btn-info"> Agregar Datos del Producto </button>
+                          </form>   
+                        </div>
+
+                      </fieldset>
+                       
+
+                       <div style="padding:20px">
+
+                        <label>  Numero de Productos  Registrados: [ {{ contadorProductos }}  ] 
+                                 Cupos Disponiles [ {{ 10 - contadorProductos }} ]</label> 
+
+
+                       <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Buscar Nombre" ng-model="buscarNombre">
+                    </div>
+                    <label> </label>
+                    <table class="table table-bordered">
+
+                      <tr>
+                        <th> Id </th> 
+                        <th> Codigo </th> 
+                        <th> Descripcion </th> 
+                        <th> Valor Unitario </th>
+                        <th> Existencia </th> 
+
+                      <tr>
+                          
+                      <tr ng-repeat="producto in productos | filter: buscarNombre">
+
+                        <td>   <span> {{ producto.contador }} </span>   </td>
+                        <td>   <span> {{ producto.codigo }} </span>   </td>
+                        <td>   <span> {{ producto.descripcion }} </span>   </td>
+                        <td>   <span> {{ producto.valor }} </span>   </td>
+                        <td>   <span> {{ producto.existencia }} </span>   </td>
+
+                      <tr>
+
+                    </table>
+                    </div> 
+
+                      </div>
+                      <!-- Fin de Productos -->
+
+
+                <!-- Ocultar Datos -->
+                <div  ng-hide="reporte" > 
+
+                  <div class="col-lg-6">
+
+                    <form ng-submit="RealizarComprar()">
+                      <button class="btn btn-info form-control"> Realizar una Compra </button>
+                    </form>  
+
+                  </div>
+
+                  <div class="col-lg-6">
+
+                    <form ng-submit="ReporteDia()">
+                      <button class="btn btn-info form-control"> Reporte del Dia </button>
+                    </form> 
+                    
+                  </div>
+
+
+                <!-- Ocultar Datos de Venta -->
+                <div  ng-hide="venta" > 
+
+                <label> </label>
+                 
+
+                  <fieldset>
+
+                        <legend> Formulario de Ventas </legend>
+
+                        <div class="col-lg-6">
+
+                          <label> Nombre del Cliente: </label>
+                          <select ng-options="cliente as cliente.nombre for cliente in clientes" class="form-control"    ng-model="ClienteOp">
+                          </select>
+
+                          <label> Codigo del Producto: </label>
+                           <select ng-options="producto as producto.codigo for producto in productos" class="form-control"   ng-model="ProdutoOp">
+                          </select>
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+                          <label>Cantidad:</label>
+                          <input type="number" class="form-control" ng-model="cantidadOp" min="1"  value="">
+
+                          <label></label>
+
+                         <form ng-submit="comprarProducto()">
+                            <button class="btn btn-info form-control"> Realizar Compra </button>
+                          </form> 
+
+                            
+                        </div>
+
+                      </fieldset>
+
+                </div>
+
+                <!-- Ocultar Datos -->
+                <div  ng-hide="reporteDia" > 
+
+                  <label> </label>
+                 <fieldset>
+                    
+                    <legend>Reportes</legend>
+
+                    <label> {{ retornoDatos }}</label>
+	
+		
+<label> Ventas Realizadas en El Dia </label>
+
+
+			<div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Buscar Por Codigo"ng-model="codigoVentas">
+                    </div>
+
+                    <table class="table table-bordered">
+
+                      <tr> 
+                        <th> Nombre Cliente </th> 
+                        <th> Codigo Producto </th> 
+                        <th> Cantidad </th>
+                        <th> Total a Pagar </th> 
+
+                      <tr>
+                          
+                      <tr ng-repeat="ventasRealizada in ventasRealizadas | filter: codigoVentas">
+
+                        <td>   <span> {{ ventasRealizada.nombreCliente }} </span>   </td>
+                        <td>   <span> {{ ventasRealizada.codigoProducto }} </span>   </td>
+                        <td>   <span> {{ ventasRealizada.cantidadUnidades }} </span>   </td>
+                        <td>   <span> {{ ventasRealizada.valorTotal }} </span>   </td>
+
+                      <tr>
+
+                    </table>
+
+			<label> Total Vendido por el Super Mercado: [  {{ totalVendido }}  ] </label>
+
+                    
+                  </fieldset>
+
+                </div>
+
+                <!-- Fin de Controlador -->
+                </div>
+
+
+
+              </div>
+
+          </div>
+      </div>
+    </div>
+
+  </body>
+
+
+
+</html>
